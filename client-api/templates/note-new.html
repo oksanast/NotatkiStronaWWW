@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome</title>
+    <meta charset="utf-8"/>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Marcellus" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/client-api/static/style.css"/>
+  </head>
+  <body>
+
+    <div id="header">
+	<h1 class="hello">Notes Api</h1>
+    </div>
+
+    <div id="messages">
+	<section id="left-column">
+		<ul class="ulmenu">
+			<li><a href="/client-api/home">Home</a></li>
+			<li><a href="/client-api/notes/new">New note</a></li>
+			<li><a href="/client-api/notes">Notes</a></li>
+			<li><a href="/client-api/logout">Logout</a></li>
+		</ul>
+	</section>
+
+	<section id="right-column">
+	<h3 class="marcellus_text"> Add a new note: </h3>
+	<div class="note">
+		<form action="/client-api/notes/new" method="post">
+			<input type="text" name="title" placeholder="Title">
+		    <input type="text" name="category" placeholder="Category">
+		    <input type="text" name="tag" placeholder="#tag1, #tag2">
+		    <textarea name="content" placeholder="Content"></textarea>
+	</div>
+		<input class="button-send" type="submit" value="Post">
+		</form>
+	</section>
+    </div>
+
+  </body>
+</html>

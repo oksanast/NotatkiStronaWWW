@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note</title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="/client-api/static/js.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Marcellus" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/client-api/static/style.css"/>
+</head>
+<body>
+
+<div id="header">
+    <h1 class="hello">Notes Api</h1>
+</div>
+
+<div id="notes">
+    <section id="left-column">
+        <ul class="ulmenu">
+            <li><a href="/client-api/home">Home</a></li>
+            <li><a href="/client-api/notes/new">New note</a></li>
+            <li><a href="/client-api/notes">Notes</a></li>
+            <li><a href="/client-api/logout">Logout</a></li>
+        </ul>
+    </section>
+
+    <section id="right-column">
+
+        <h3 class="marcellus_text"> Note #{{res['note_id']}}: </h3>
+
+        <div id="show" class="note note-text visible">
+            <h2 class="marcellus_text"><a href="/client-api/notes/{{res['note_id']}}">{{res['title']}}</a></h2>
+            <h4 class="category"><a href="/client-api/categories/{{res['category']}}"> {{res['category']}}</a></h4>
+            <p>{{res['content']}}</p>
+            <h5 class="tags">{% for j in res['tag'][1:-1].split(', ') %} <a href="/client-api/tags/{{j[1:-1]}}">#{{j[1:-1]}}</a>{% endfor %}</h5>
+        </div>
+
+        <script>var res = {{res|tojson|safe}}; var token = {{token|tojson|safe}}</script>
+        <div id="buttons">
+            <button class="button-edit" onclick="edit()">Edit</button>
+            <button class="button-delete" onclick="del()">Delete</button>
+        </div>
+
+        <div id="edit" class="invisible">
+            <div class="note"><form>
+                <input id="title" type="text" name="title" value="{{res['title']}}">
+                <input id="category" type="text" name="category" value="{{res['category']}}">
+                <input id="tag" type="text" name="tag" value="{% for j in res['tag'][1:-1].split(', ')[:-1] %}#{{j[1:-1]}}, {% endfor %}#{{res['tag'][1:-1].split(', ')[-1][1:-1]}}">
+                <textarea id="content" name="content">{{res['content']}}</textarea>
+            </form></div>
+
+            <button class="button-edit" onclick="edit_note()">Edit this note</button>
+            <button class="button-delete" onclick="cancel()">Cancel</button>
+        </div>
+
+    </section>
+</div>
+
+</body>
+</html>
